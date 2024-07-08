@@ -30,19 +30,6 @@ jobs:
         with:
           ref: "refs/pull/${{ github.event.pull_request.number }}/head"
 
-      - id: coverage
-        name: Generate Coverage Report
-        uses: alekitto/grcov@v0.2
-
-      - id: echo_token
+      - id: echo_codecov_token
         name: Print codecov token
         run: echo "${{ secrets.CODECOV_TOKEN }}"
-
-      - id: upload
-        name: Upload Coverage Report
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ steps.coverage.outputs.report }}
-          verbose: true
-          fail_ci_if_error: true
