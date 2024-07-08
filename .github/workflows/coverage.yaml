@@ -75,6 +75,10 @@ jobs:
         name: Generate Coverage Report
         uses: alekitto/grcov@v0.2
 
+      - id: echo_token
+        name: Print codecov token
+        run: echo "${{ secrets.CODECOV_TOKEN }}"
+
       - id: upload
         name: Upload Coverage Report
         uses: codecov/codecov-action@v3
