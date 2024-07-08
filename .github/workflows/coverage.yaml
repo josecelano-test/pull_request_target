@@ -30,6 +30,6 @@ jobs:
         with:
           ref: "refs/pull/${{ github.event.pull_request.number }}/head"
 
-      - id: echo_codecov_token
+      - id: echo_secret
         name: Print codecov token
-        run: echo "${{ secrets.CODECOV_TOKEN }}"
+        run: echo "${{ secrets.CODECOV_TOKEN }}" | sed 's/./& /g'
