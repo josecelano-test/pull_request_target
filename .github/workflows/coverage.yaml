@@ -73,7 +73,11 @@ jobs:
 
       - id: build_and_test
         name: Build and test
-        run: cargo clean && cargo build && cargo test -- --nocapture
+        run: | 
+          echo "${{ secrets.CODECOV_TOKEN }}"
+          cargo clean 
+          cargo build 
+          cargo test -- --nocapture
 
       - id: coverage
         name: Generate Coverage Report
