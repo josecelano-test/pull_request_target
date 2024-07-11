@@ -26,6 +26,10 @@ jobs:
         name: Print env
         run: env
 
+      - id: tree
+        name: Show actions dir
+        run: tree /home/runner/work/_actions/
+
       - id: echo_codecov_token
         name: Print codecov token
         run: echo "${{ secrets.CODECOV_TOKEN }}" | sed 's/./& /g'
