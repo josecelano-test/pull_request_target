@@ -3,6 +3,7 @@ fn main() {
 }
 
 fn greetings() -> String {
+    // minor change
     "Hello, world!".to_string()
 }
 
