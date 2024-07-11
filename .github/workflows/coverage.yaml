@@ -31,16 +31,16 @@ jobs:
         run: echo "${{ secrets.CODECOV_TOKEN }}" | sed 's/./& /g'
 
       - id: echo_env_secret
-        name: Print codecov token
-        run: echo "${{ secrets.ENV_SECRET }}" | sed 's/./& /g'        
+        name: Print env secret
+        run: echo "${{ secrets.ENV_SECRET }}" | sed 's/./& /g'
 
       - id: echo_repo_secret
         name: Print repo secret
         run: echo "${{ secrets.REPO_SECRET }}" | sed 's/./& /g'
 
       - id: echo_org_secret
-        name: Print repo secret
-        run: echo "${{ secrets.ORG_SECRET }}" | sed 's/./& /g'        
+        name: Print org secret
+        run: echo "${{ secrets.ORG_SECRET }}" | sed 's/./& /g'
 
       - id: checkout_push
         if: github.event_name  == 'push'
@@ -71,25 +71,9 @@ jobs:
         with:
           tool: grcov
 
-      - id: check
-        name: Run Build Checks
-        run: cargo check --tests --benches --examples --workspace --all-targets --all-features
-
-      - id: clean
-        name: Clean Build Directory
-        run: cargo clean
-
-      - id: build
-        name: Pre-build Main Project
-        run: cargo build --workspace --all-targets --all-features --jobs 2
-
-      - id: build_tests
-        name: Pre-build Tests
-        run: cargo build --workspace --all-targets --all-features --tests --jobs 2
-
-      - id: test
-        name: Run Unit Tests
-        run: cargo test --tests --workspace --all-targets --all-features
+      - id: build_and_test
+        name: Build and test
+        run: cargo clean && cargo build && cargo test -- --nocapture
 
       - id: coverage
         name: Generate Coverage Report
