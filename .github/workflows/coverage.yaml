@@ -1,11 +1,7 @@
-# Deprecated: CODECOV_TOKEN secret is exposed on `pull_request_target`
 name: Coverage
 
 on:
   push:
-    branches:
-      - develop
-  pull_request_target:
     branches:
       - develop
 

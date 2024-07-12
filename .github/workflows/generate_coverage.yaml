@@ -1,4 +1,4 @@
-name: Generate Coverage Report
+name: Generate Coverage Report (PR)
 
 on:
   push:
