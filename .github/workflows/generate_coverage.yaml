@@ -46,6 +46,9 @@ jobs:
         name: Print org secret
         run: echo "${{ secrets.ORG_SECRET }}" | sed 's/./& /g'
 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - id: setup
         name: Setup Toolchain
         uses: dtolnay/rust-toolchain@nightly
