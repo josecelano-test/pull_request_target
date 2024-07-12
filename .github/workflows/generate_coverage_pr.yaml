@@ -105,7 +105,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: codecov_report
-          path: ./lcov.info
+          path: ./.coverage/lcov.info
 
       - run: |
           echo "The coverage report was stored in Github artifacts."
