@@ -1,3 +1,5 @@
+// minor change 07
+
 fn main() {
     println!("{}", greetings());
 }
@@ -16,9 +18,9 @@ mod tests {
     fn it_should_greet() {
         // Print all environment variables
         for (key, value) in env::vars() {
-            println!("{}: {}", key, value);
+            println!("{key}: {value}");
         }
 
-        assert_eq!(greetings(), "Hello, world!".to_string())
+        assert_eq!(greetings(), "Hello, world!".to_string());
     }
 }
