@@ -7,6 +7,13 @@ on:
     workflows: ["Generate Coverage Report (PR)"]
     types:
       - completed
+
+permissions:
+  actions: write
+  contents: write
+  issues: write
+  pull-requests: write
+
 jobs:
   coverage:
     name: Upload Coverage Report
