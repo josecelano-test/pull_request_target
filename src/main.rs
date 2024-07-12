@@ -1,5 +1,6 @@
 fn main() {
     println!("{}", greetings());
+    println!("{}", greetings());
 }
 
 fn greetings() -> String {
