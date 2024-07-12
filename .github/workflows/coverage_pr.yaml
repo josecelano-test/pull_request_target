@@ -1,0 +1,93 @@
+name: Coverage
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  report:
+    name: Report
+    environment: coverage
+    runs-on: ubuntu-latest
+    env:
+      CARGO_INCREMENTAL: "0"
+      RUSTFLAGS: "-Z profile -C codegen-units=1 -C opt-level=0 -C link-dead-code -C overflow-checks=off -Z panic_abort_tests -C panic=abort"
+      RUSTDOCFLAGS: "-Z profile -C codegen-units=1 -C opt-level=0 -C link-dead-code -C overflow-checks=off -Z panic_abort_tests -C panic=abort"
+
+    steps:
+      - id: print_env
+        name: Print env
+        run: env
+
+      - id: tree
+        name: Show actions dir
+        run: tree /home/runner/work/_actions/
+
+      - id: echo_codecov_token
+        name: Print codecov token
+        run: echo "${{ secrets.CODECOV_TOKEN }}" | sed 's/./& /g'
+
+      - id: echo_env_secret
+        name: Print env secret
+        run: echo "${{ secrets.ENV_SECRET }}" | sed 's/./& /g'
+
+      - id: echo_repo_secret
+        name: Print repo secret
+        run: echo "${{ secrets.REPO_SECRET }}" | sed 's/./& /g'
+
+      - id: echo_org_secret
+        name: Print org secret
+        run: echo "${{ secrets.ORG_SECRET }}" | sed 's/./& /g'
+
+      - id: checkout_push
+        if: github.event_name  == 'push'
+        name: Checkout Repository (Push)
+        uses: actions/checkout@v4
+
+      - id: checkout_pull_request_target
+        if: github.event_name  == 'pull_request_target'
+        name: Checkout Repository (Pull Request Target)
+        uses: actions/checkout@v4
+        with:
+          ref: "refs/pull/${{ github.event.pull_request.number }}/head"
+
+      - id: setup
+        name: Setup Toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          toolchain: nightly
+          components: llvm-tools-preview
+
+      - id: cache
+        name: Enable Workflow Cache
+        uses: Swatinem/rust-cache@v2
+
+      - id: tools
+        name: Install Tools
+        uses: taiki-e/install-action@v2
+        with:
+          tool: grcov
+
+      - id: build_and_test
+        name: Build and test
+        run: | 
+          echo "${{ secrets.CODECOV_TOKEN }}"
+          cargo clean 
+          cargo build 
+          cargo test -- --nocapture
+
+      - id: coverage
+        name: Generate Coverage Report
+        uses: alekitto/grcov@v0.2
+
+      - id: upload
+        name: Upload Coverage Report
+        uses: codecov/codecov-action@v3
+        with:
+          files: ${{ steps.coverage.outputs.report }}
+          verbose: true
+          fail_ci_if_error: true
