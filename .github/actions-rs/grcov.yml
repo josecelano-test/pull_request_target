@@ -1,2 +1,2 @@
 output-type: lcov
-output-path: ./.coverage/lcov.info
+output-path: ./lcov.info

@@ -98,7 +98,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ github.workspace }}/.coverage/lcov.info
+          files: ${{ github.workspace }}/lcov.info
           fail_ci_if_error: true
           # Manual overrides for these parameters are needed because automatic detection
           # in codecov-action does not work for non-`pull_request` workflows.
