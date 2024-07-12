@@ -1,3 +1,4 @@
+# Deprecated: CODECOV_TOKEN secret is exposed on `pull_request_target`
 name: Coverage
 
 on:
