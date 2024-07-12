@@ -43,17 +43,8 @@ jobs:
         name: Print org secret
         run: echo "${{ secrets.ORG_SECRET }}" | sed 's/./& /g'
 
-      - id: checkout_push
-        if: github.event_name  == 'push'
-        name: Checkout Repository (Push)
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - id: checkout_pull_request_target
-        if: github.event_name  == 'pull_request_target'
-        name: Checkout Repository (Pull Request Target)
-        uses: actions/checkout@v4
-        with:
-          ref: "refs/pull/${{ github.event.pull_request.number }}/head"
 
       - id: setup
         name: Setup Toolchain
@@ -74,7 +65,7 @@ jobs:
 
       - id: build_and_test
         name: Build and test
-        run: | 
+        run: |
           echo "${{ secrets.CODECOV_TOKEN }}"
           cargo clean 
           cargo build 
