@@ -2,9 +2,9 @@ name: Upload Coverage Report
 
 on:
   # This workflow is triggered after every successfull execution
-  # of `generate_coverage` workflow.
+  # of `Generate Coverage Report` workflow.
   workflow_run:
-    workflows: ["generate_coverage"]
+    workflows: ["Generate Coverage Report"]
     types:
       - completed
 jobs:
