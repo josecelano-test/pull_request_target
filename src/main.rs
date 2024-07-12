@@ -1,3 +1,5 @@
+// minor change 06
+
 fn main() {
     println!("{}", greetings());
 }
