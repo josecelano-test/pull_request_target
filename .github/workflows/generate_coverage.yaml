@@ -12,8 +12,8 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  report:
-    name: Report
+  coverage:
+    name: Generate Coverage Report
     environment: coverage
     runs-on: ubuntu-latest
     env:
