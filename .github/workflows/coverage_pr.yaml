@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CARGO_INCREMENTAL: "0"
-      RUSTFLAGS: "-Z profile -C codegen-units=1 -C opt-level=0 -C link-dead-code -C overflow-checks=off -Z panic_abort_tests -C panic=abort"
-      RUSTDOCFLAGS: "-Z profile -C codegen-units=1 -C opt-level=0 -C link-dead-code -C overflow-checks=off -Z panic_abort_tests -C panic=abort"
+      RUSTFLAGS: "-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests"
+      RUSTDOCFLAGS: "-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests"
 
     steps:
       - id: print_env
