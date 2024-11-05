@@ -73,13 +73,15 @@ jobs:
 
       - id: coverage
         name: Generate Coverage Report
-        uses: alekitto/grcov@v0.2
+        run: |
+          mkdir .coverage
+          cargo cov-lcov
 
       - id: upload
         name: Upload Coverage Report
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ steps.coverage.outputs.report }}
+          file: ./.coverage/lcov.info
           verbose: true
           fail_ci_if_error: true
