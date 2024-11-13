@@ -76,8 +76,7 @@ jobs:
       - id: coverage
         name: Generate Coverage Report
         run: |
-          mkdir .coverage
-          cargo cov-lcov
+          cargo llvm-cov --lcov --output-path=./lcov.info
 
       - name: Store PR number and commit SHA
         run: |
