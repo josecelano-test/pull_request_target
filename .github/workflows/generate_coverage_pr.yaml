@@ -18,30 +18,6 @@ jobs:
       RUSTFLAGS: "-Cinstrument-coverage"
 
     steps:
-      - id: print_env
-        name: Print env
-        run: env
-
-      - id: tree
-        name: Show actions dir
-        run: tree /home/runner/work/_actions/
-
-      - id: echo_codecov_token
-        name: Print codecov token
-        run: echo "${{ secrets.CODECOV_TOKEN }}" | sed 's/./& /g'
-
-      - id: echo_env_secret
-        name: Print env secret
-        run: echo "${{ secrets.ENV_SECRET }}" | sed 's/./& /g'
-
-      - id: echo_repo_secret
-        name: Print repo secret
-        run: echo "${{ secrets.REPO_SECRET }}" | sed 's/./& /g'
-
-      - id: echo_org_secret
-        name: Print org secret
-        run: echo "${{ secrets.ORG_SECRET }}" | sed 's/./& /g'
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
