@@ -15,8 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CARGO_INCREMENTAL: "0"
-      RUSTFLAGS: "-Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort"
-      RUSTDOCFLAGS: "-Cpanic=abort"
+      RUSTFLAGS: "-Cinstrument-coverage"
 
     steps:
       - id: print_env
@@ -73,7 +72,9 @@ jobs:
 
       - id: coverage
         name: Generate Coverage Report
-        uses: alekitto/grcov@v0.2
+        run: |
+          mkdir .coverage
+          cargo cov-lcov
 
       - name: Store PR number and commit SHA
         run: |
