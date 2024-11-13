@@ -63,7 +63,7 @@ jobs:
         name: Install Tools
         uses: taiki-e/install-action@v2
         with:
-          tool: grcov
+          tool: grcov,cargo-llvm-cov
 
       - id: build_and_test
         name: Build and test
